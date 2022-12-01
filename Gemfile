@@ -35,14 +35,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'rspec-rails'
-  gem 'capybara' # easy to use feature test syntax and methods
-  gem 'launchy' # save_and_open_page
+  gem 'capybara' # easy to use methods and syntax for webpage testing
+  gem 'launchy' # save_and_open_page: launches html page so we can see visual test results
   gem 'simplecov'
-  gem 'shoulda-matchers' # used most for model relational tests
+  gem 'shoulda-matchers', '~> 5.0' # used most for model relational tests
   gem 'orderly' # tests order of appearance on webpage
 end
 
