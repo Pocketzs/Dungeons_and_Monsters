@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Dungeons Index", type: :feature do
   describe 'As a user' do
     describe 'When I visit /dungeons' do
-      it "Then I see the name of each dungeon's name, kind, and hold" do
+      it "Then I see each dungeon's name" do
         dungeon_1 = Dungeon.create!(
           name: "Blackreach", 
           kind: "Dwemer Ruins", 
@@ -23,11 +23,7 @@ RSpec.describe "Dungeons Index", type: :feature do
         visit "/dungeons" 
         save_and_open_page
         expect(page).to have_content(dungeon_1.name)
-        expect(page).to have_content("Type: #{dungeon_1.kind}")
-        expect(page).to have_content("Hold: #{dungeon_1.hold}")
         expect(page).to have_content(dungeon_2.name)
-        expect(page).to have_content("Type: #{dungeon_2.kind}")
-        expect(page).to have_content("Hold: #{dungeon_2.hold}")
       end
     end
   end
