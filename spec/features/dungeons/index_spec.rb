@@ -21,7 +21,7 @@ RSpec.describe "Dungeons Index", type: :feature do
         )
         
         visit "/dungeons" 
-        save_and_open_page
+        # save_and_open_page
         expect(page).to have_content(dungeon_1.name)
         expect(page).to have_content(dungeon_2.name)
       end
