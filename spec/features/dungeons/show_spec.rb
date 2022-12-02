@@ -21,7 +21,7 @@ RSpec.describe "Dungeons Show", type: :feature do
         )
         
         visit "/dungeons/#{dungeon_1.id}" 
-        save_and_open_page
+        # save_and_open_page
         expect(page).to have_content(dungeon_1.name)
         expect(page).to have_content("Type: #{dungeon_1.kind}")
         expect(page).to have_content("Hold: #{dungeon_1.hold}")
