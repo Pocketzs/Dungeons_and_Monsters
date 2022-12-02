@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+@dungeon_1 = Dungeon.create!(
+          name: "Blackreach", 
+          kind: "Dwemer Ruins", 
+          hold: "Winterhold", 
+          cleared: false, 
+          visit_count: 29
+        )
+
+@dungeon_2 = Dungeon.create!(
+          name: "Forsaken Cave",
+          kind: "Cave",
+          hold: "The Pale",
+          cleared: true,
+          visit_count: 30
+        )
+        
