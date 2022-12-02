@@ -1,0 +1,9 @@
+<h1>Dungeons Index</h1>
+
+
+<% @dungeons.each do |dungeon| %>
+  <h3><p><%= dungeon.name %></p></h3>
+  <p>Type: <%= dungeon.kind %></p>
+  <p>Hold: <%= dungeon.hold %></p>
+<% end %>
+
