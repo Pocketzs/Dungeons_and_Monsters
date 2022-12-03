@@ -4,7 +4,14 @@ RSpec.describe "Monsters Index", type: :feature do
   describe 'As a user' do
     describe "When I visit '/monsters'" do
       it "Then I see each monster in the system including the monster's attributes" do
-        mon_1 = Monster.create!(
+        dungeon_1 = Dungeon.create!(
+          name: "Blackreach", 
+          kind: "Dwemer Ruins", 
+          hold: "Winterhold", 
+          cleared: false, 
+          visit_count: 29
+        )
+        mon_1 = dungeon_1.monsters.create!(
           name: "Falmer",
           dead: false,
           health: 180,
@@ -12,7 +19,7 @@ RSpec.describe "Monsters Index", type: :feature do
           soul_size: "Common",
           loot: "Falmer War Axe"
         )
-        mon_2 = Monster.create!(
+        mon_2 = dungeon_1.monsters.create!(
           name: "Chaurus",
           dead: false,
           health: 253,
@@ -20,7 +27,7 @@ RSpec.describe "Monsters Index", type: :feature do
           soul_size: "Lesser",
           loot: "Chaurus Chitin"
         )
-        mon_3 = Monster.create!(
+        mon_3 = dungeon_1.monsters.create!(
           name: "Dwarven Centurion",
           dead: true,
           health: 653,
@@ -28,7 +35,7 @@ RSpec.describe "Monsters Index", type: :feature do
           soul_size: "Grand",
           loot: "Centurion Dynamo Core"
         )
-        mon_4 = Monster.create!(
+        mon_4 = dungeon_1.monsters.create!(
           name: "Frostbite Spider",
           dead: true,
           health: 220,
@@ -38,7 +45,7 @@ RSpec.describe "Monsters Index", type: :feature do
         )
 
         visit "/monsters"
-        save_and_open_page
+        # save_and_open_page
         expect(page).to have_content(mon_1.name)
         expect(page).to have_content("Dead?: #{mon_1.dead}")
         expect(page).to have_content("Health: #{mon_1.health}")
