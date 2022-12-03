@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get "/dungeons/:id", to: "dungeons#show"
   get "/monsters", to: "monsters#index"
   get "/monsters/:id", to: "monsters#show"
+  get "/dungeons/:dungeon_id/monsters", to: "dungeon_monsters#index"
 end

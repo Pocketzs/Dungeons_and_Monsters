@@ -1,0 +1,10 @@
+<h1>Monsters of <%= @dungeon.name %></h1>
+
+<% @monsters.each do |monster| %>
+  <h3><%= monster.name %></h3>
+  <p>Health: <%= monster.health %></p>
+  <p>Level: <%= monster.level %></p>
+  <p>Soul Size: <%= monster.soul_size %></p>
+  <p>Dead?: <%= monster.dead %></p>
+  <p>Loot: <%= monster.loot %></p>
+<% end %>

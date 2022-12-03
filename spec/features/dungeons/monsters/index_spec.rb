@@ -1,15 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "Monsters Index", type: :feature do
+RSpec.describe "Dungeon's Monsters Index" do
   describe "As a user" do
-    describe "When I visit '/monsters/:id" do
-      it "Then I see the monster with that id including the monster's attributes" do
+    describe "When I visit '/dungeons/:dungeon_id/monsters" do
+      it "Then I see each Monster that is associated with that Dungeon with each monster's attributes" do
         dungeon_1 = Dungeon.create!(
           name: "Blackreach", 
           kind: "Dwemer Ruins", 
           hold: "Winterhold", 
           cleared: false, 
           visit_count: 29
+        )
+        dungeon_2 = Dungeon.create!(
+          name: "Forsaken Cave",
+          kind: "Cave",
+          hold: "The Pale",
+          cleared: true,
+          visit_count: 30
         )
         mon_1 = dungeon_1.monsters.create!(
           name: "Falmer",
@@ -19,7 +26,7 @@ RSpec.describe "Monsters Index", type: :feature do
           soul_size: "Common",
           loot: "Falmer War Axe"
         )
-        mon_2 = dungeon_1.monsters.create!(
+        mon_2 = dungeon_2.monsters.create!(
           name: "Chaurus",
           dead: true,
           health: 253,
@@ -28,8 +35,8 @@ RSpec.describe "Monsters Index", type: :feature do
           loot: "Chaurus Chitin"
         )
 
-        visit "/monsters/#{mon_1.id}"
-        # save_and_open_page
+        visit "/dungeons/#{dungeon_1.id}/monsters"
+        save_and_open_page
         expect(page).to have_content(mon_1.name)
         expect(page).to have_content("Dead?: #{mon_1.dead}")
         expect(page).to have_content("Health: #{mon_1.health}")
