@@ -89,10 +89,42 @@ RSpec.describe Dungeon, type: :model do
           soul_size: "Petty",
           loot: "Frostbite Venom"
         )
+        @dungeon_2 = Dungeon.create!(
+          name: "Forsaken Cave",
+          kind: "Cave",
+          hold: "The Pale",
+          cleared: true,
+          visit_count: 30
+        )
+        @dun_2_mon_1 = @dungeon_2.monsters.create!(
+          name: "Ice Wraith",
+          dead: true,
+          health: 193,
+          level: 9,
+          soul_size: "Lesser",
+          loot: "Ice Wraith Teeth"
+        )
+        @dun_2_mon_2 = @dungeon_2.monsters.create!(
+          name: "Draugr",
+          dead: true,
+          health: 50,
+          level: 1,
+          soul_size: "Petty",
+          loot: "Ancient Nord Bow"
+        )
+        @dun_2_mon_3 = @dungeon_2.monsters.create!(
+          name: "Curalmil",
+          dead: true,
+          health: 404,
+          level: 15,
+          soul_size: "Greater",
+          loot: "Elven Shield of Greater Blocking"
+        )
       end
-      
+
       it 'returns the number of Monsters associated with a Dungeon' do
         expect(@dungeon_1.monster_count).to eq(4)
+        expect(@dungeon_2.monster_count).to eq(3)
       end
     end
     
