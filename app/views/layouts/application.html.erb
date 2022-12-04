@@ -8,8 +8,40 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
+  <%# style format from %>
+  <%# https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_menu %>
+  <style> 
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+  }
 
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111111;
+  }
+  </style>
   <body>
+    <nav class="menu">
+      <ul>
+        <li><a href="/monsters">Monsters Index</a></li>
+        <li><a href="/dungeons">Dungeons Index</a></li>
+      </ul>
+    </nav>
     <%= yield %>
   </body>
 </html>
