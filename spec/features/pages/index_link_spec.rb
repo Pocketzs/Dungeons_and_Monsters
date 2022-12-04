@@ -24,10 +24,18 @@ RSpec.describe 'Monsters Link', type: :feature do
       it 'Then I see a link at the top of the page that takes me to the Monsters Index' do
         visit "/dungeons"
         expect(page).to have_link('Monsters Index', href: '/monsters')
-        save_and_open_page
+
         visit "/dungeons/#{@dungeon_1.id}"
         expect(page).to have_link('Monsters Index', href: '/monsters')
-        save_and_open_page
+
+        visit "/monsters"
+        expect(page).to have_link('Monsters Index', href: '/monsters')
+
+        visit "/monsters/#{@dun_1_mon_1.id}"
+        expect(page).to have_link('Monsters Index', href: '/monsters')
+
+        visit "/dungeons/#{@dungeon_1.id}/monsters"
+        expect(page).to have_link('Monsters Index', href: '/monsters')
       end
     end
   end
