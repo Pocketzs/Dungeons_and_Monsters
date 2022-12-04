@@ -1,14 +1,14 @@
-<h1>Dungeons Index</h1>
 <nav class="menu">
   <ul>
     <li><a href="/monsters">Monsters Index</a></li>
     <li><a href="/dungeons">Dungeons Index</a></li>
   </ul>
 </nav>
+<h1>Dungeons Index</h1>
 
 
 <% @dungeons.each do |dungeon| %>
-  <h3><p><%= dungeon.name %></p></h3>
+  <h2><p><%= dungeon.name %></p></h2>
   <p>Created at: <%= dungeon.created_at %></p>
 <% end %>
 
