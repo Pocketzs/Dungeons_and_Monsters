@@ -67,10 +67,16 @@ RSpec.describe "Dungeon Show", type: :feature do
         expect(page).to_not have_content("Visit Count: #{@dungeon_2.visit_count}")
       end
 
-      it "I see a count of the number of monsters associated with this dungeon" do
+      it "Then I see a count of the number of monsters associated with this dungeon" do
         visit "/dungeons/#{@dungeon_1.id}"
 
         expect(page).to have_content("Number of Monsters: #{@dungeon_1.monster_count}")
+      end
+
+      it "Then I see a link to take me to that Dungeon's Monsters page '/dungeons/:dungeon_id/monsters'" do
+        visit "/dungeons/#{@dungeon_1.id}"
+
+        expect(page).to have_link("View Monsters", href: "/dungeons/#{@dungeon_1.id}/monsters")
       end
     end
   end
