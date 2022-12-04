@@ -36,7 +36,7 @@ RSpec.describe "Dungeon's Monsters Index" do
         )
 
         visit "/dungeons/#{dungeon_1.id}/monsters"
-        save_and_open_page
+        # save_and_open_page
         expect(page).to have_content(mon_1.name)
         expect(page).to have_content("Dead?: #{mon_1.dead}")
         expect(page).to have_content("Health: #{mon_1.health}")
