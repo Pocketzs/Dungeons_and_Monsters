@@ -16,7 +16,7 @@ class DungeonsController < ApplicationController
   end
 
   def edit
-    
+    @dungeon = Dungeon.find(params[:id])
   end
 
   private
