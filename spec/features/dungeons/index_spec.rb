@@ -65,6 +65,15 @@ RSpec.describe "Dungeons Index", type: :feature do
 
         expect(page).to have_link("New Dungeon", href: "/dungeons/new")
       end
+
+      describe "When I click this link" do
+        it "Then I am taken to '/dungeons/new' where I see a form for a new dungeon" do
+          visit "/dungeons"
+          click_link("New Dungeon")
+
+          expect(current_path).to eq("/dungeons/new")
+        end
+      end
     end
   end
 end
