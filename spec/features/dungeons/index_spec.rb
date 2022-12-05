@@ -43,7 +43,7 @@ RSpec.describe "Dungeons Index", type: :feature do
         expect(page).to have_content(@dungeon_4.name)
       end
 
-      it ' I see that records are ordered by most recently created first' do
+      it 'Then I see that records are ordered by most recently created first' do
         visit "/dungeons"
 
         expect(@dungeon_4.name).to appear_before(@dungeon_3.name)
@@ -51,13 +51,28 @@ RSpec.describe "Dungeons Index", type: :feature do
         expect(@dungeon_2.name).to appear_before(@dungeon_1.name)
       end
 
-      it 'Next to each of the records I see when it was created' do
+      it 'Then next to each of the records I see when it was created' do
         visit "/dungeons"
 
         expect(page).to have_content("Created at: #{@dungeon_1.created_at}")
         expect(page).to have_content("Created at: #{@dungeon_2.created_at}")
         expect(page).to have_content("Created at: #{@dungeon_3.created_at}")
         expect(page).to have_content("Created at: #{@dungeon_4.created_at}")
+      end
+
+      it 'Then I see a link to create a new Dungeon record, "New Dungeon"' do
+        visit "/dungeons"
+
+        expect(page).to have_link("New Dungeon", href: "/dungeons/new")
+      end
+
+      describe "When I click this link" do
+        it "Then I am taken to '/dungeons/new' where I see a form for a new dungeon" do
+          visit "/dungeons"
+          click_link("New Dungeon")
+
+          expect(current_path).to eq("/dungeons/new")
+        end
       end
     end
   end
