@@ -78,6 +78,21 @@ RSpec.describe "Dungeon Show", type: :feature do
 
         expect(page).to have_link("View Monsters", href: "/dungeons/#{@dungeon_1.id}/monsters")
       end
+
+      it 'Then I see a link to update the dungeon "Update Dungeon' do
+        visit "/dungeons/#{@dungeon_1.id}"
+
+        expect(page).to have_link("Update Dungeon", href: "/dungeons/#{@dungeon_1.id}/edit")
+      end
+
+      describe 'When I click the link "Update Dungeon"' do
+        it "Then I am taken to '/dungeons/:dungeon_id/edit'" do
+          visit "/dungeons/#{@dungeon_1.id}"
+          click_link "Update Dungeon"
+
+          expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/edit")
+        end
+      end
     end
   end
 end
