@@ -65,7 +65,6 @@ RSpec.describe "Dungeon's Monsters Index" do
           visit "/dungeons/#{@dungeon_1.id}/monsters"
           click_link("Create Monster")
           
-          save_and_open_page
           expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/monsters/new")
           expect(page).to have_field("Name")
           expect(page).to have_field("Health")
