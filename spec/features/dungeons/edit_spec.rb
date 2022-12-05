@@ -51,24 +51,46 @@ RSpec.describe 'Edit Dungeon Page' do
           visit_count: 30
         )
       end
+
+      it "Then I see the form prefilled with the original data" do
+        visit "/dungeons/#{@dungeon_1.id}/edit"
+
+        expect(page).to have_field('Name', with: 'Blackreach')
+        expect(page).to have_field('Type', with: 'Dwemer Ruins')          
+        expect(page).to have_field('Hold', with: 'Winterhold')          
+        expect(page).to have_field('Cleared?', with: false)
+        expect(page).to have_field('Visit Count', with: 29)
+
+        visit "/dungeons/#{@dungeon_2.id}/edit"
+
+        expect(page).to have_field('Name', with: 'Forsaken Cave')
+        expect(page).to have_field('Type', with: 'Cave')          
+        expect(page).to have_field('Hold', with: 'The Pale')          
+        expect(page).to have_field('Cleared?', with: true)
+        expect(page).to have_field('Visit Count', with: 30)
+      end
+
       describe 'When I fill out the form with updated information and I click the button
       to submit the form' do
-        it "Then I see the form prefilled with the original data" do
+        it 'Then a "PATCH" request is sent to "/dungeons/:id", the dungeons info is updated,
+        and I am redirected to the Dungeons Show page where I see the dungeons updated
+        info' do
           visit "/dungeons/#{@dungeon_1.id}/edit"
 
-          expect(page).to have_field('Name', with: 'Blackreach')
-          expect(page).to have_field('Type', with: 'Dwemer Ruins')          
-          expect(page).to have_field('Hold', with: 'Winterhold')          
-          expect(page).to have_field('Cleared?', with: false)
-          expect(page).to have_field('Visit Count', with: 29)
+          fill_in('Name', with: 'Greywater Grotto')
+          select('Cave', from: 'Type')
+          select('Falkreath Hold', from: 'Hold')
+          select(false, from: 'Cleared?')
+          fill_in('Visit Count', with: 0)
+          click_button('Confirm')
 
-          visit "/dungeons/#{@dungeon_2.id}/edit"
+          expect(current_path).to eq("/dungeons/#{@dungeon_1.id}")
 
-          expect(page).to have_field('Name', with: 'Forsaken Cave')
-          expect(page).to have_field('Type', with: 'Cave')          
-          expect(page).to have_field('Hold', with: 'The Pale')          
-          expect(page).to have_field('Cleared?', with: true)
-          expect(page).to have_field('Visit Count', with: 30)
+          expect(page).to have_content('Greywater Grotto')
+          expect(page).to have_content('Type: Cave')
+          expect(page).to have_content('Hold: Falkreath Hold')
+          expect(page).to have_content("Cleared?: #{false}")
+          expect(page).to have_content("Visit Count: #{0}")
         end
       end
     end

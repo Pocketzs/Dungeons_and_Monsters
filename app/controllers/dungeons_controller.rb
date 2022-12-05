@@ -8,10 +8,11 @@ class DungeonsController < ApplicationController
   end
 
   def new
+    @dungeon = Dungeon.new
   end
 
   def create
-    Dungeon.create(dungeon_params)
+    Dungeon.create!(dungeon_params)
     redirect_to '/dungeons'
   end
 
@@ -19,9 +20,15 @@ class DungeonsController < ApplicationController
     @dungeon = Dungeon.find(params[:id])
   end
 
+  def update
+    @dungeon = Dungeon.find(params[:id])
+    @dungeon.update!(dungeon_params)
+    redirect_to "/dungeons/#{@dungeon.id}"
+  end
+
   private
 
   def dungeon_params
-    params.permit(:name, :kind, :hold, :cleared, :visit_count)
+    params.require(:dungeon).permit(:name, :kind, :hold, :cleared, :visit_count)
   end
 end

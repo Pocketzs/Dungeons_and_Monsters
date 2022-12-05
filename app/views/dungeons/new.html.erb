@@ -1,4 +1,6 @@
-<%= form_with url: '/dungeons', method: :post, local: true  do |form|  %>
+<h1>Create New Dungeon</h1>
+
+<%= form_with model: @dungeon, url: '/dungeons', method: :post, local: true  do |form|  %>
   <%= form.label :name%>
   <%= form.text_field :name%><br>
   <%= form.label :kind, "Type"%>
@@ -9,5 +11,6 @@
   <%= form.select :cleared, [true, false] %><br>
   <%= form.label :visit_count, "Visit Count" %>
   <%= form.number_field :visit_count %><br>
+  <br>
   <%= form.submit "Create Dungeon" %>
 <% end %>
