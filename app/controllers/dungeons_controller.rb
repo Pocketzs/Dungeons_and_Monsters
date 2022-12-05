@@ -15,6 +15,10 @@ class DungeonsController < ApplicationController
     redirect_to '/dungeons'
   end
 
+  def edit
+    
+  end
+
   private
 
   def dungeon_params
