@@ -1,0 +1,18 @@
+<h1>Create Monster for <%= @dungeon.name %></h1>
+
+<%= form_with model: @monster, url: "/dungeons/#{@dungeon.id}/monsters", method: :post, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :health %>
+  <%= f.number_field :health %><br>
+  <%= f.label :level %>
+  <%= f.number_field :level %><br>
+  <%= f.label :soul_size, "Soul Size"%>
+  <%= f.select :soul_size, ['Petty', 'Lesser', 'Common', 'Greater', 'Grand', 'Black'] %><br>
+  <%= f.label :dead, "Dead?" %>
+  <%= f.select :dead, [false, true] %> <br>
+  <%= f.label :loot %>
+  <%= f.text_field :loot %> <br>
+  <br>
+  <%= f.submit "Create Monster" %>
+<% end %>
