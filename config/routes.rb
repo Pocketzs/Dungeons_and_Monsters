@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/monsters/:id", to: "monsters#show"
   get "/monsters/:id/edit", to: "monsters#edit"
   patch "/monsters/:id", to: "monsters#update"
+  delete "/monsters/:id", to: "monsters#destroy"
   get "/dungeons/:dungeon_id/monsters", to: "dungeon_monsters#index"
   get "/dungeons/:dungeon_id/monsters/new", to: "dungeon_monsters#new"
   post "/dungeons/:dungeon_id/monsters", to: "dungeon_monsters#create"

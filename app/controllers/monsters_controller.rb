@@ -17,6 +17,12 @@ class MonstersController < ApplicationController
     redirect_to "/monsters/#{monster.id}"
   end
 
+  def destroy
+    monster = Monster.find(params[:id])
+    monster.destroy
+    redirect_to "/monsters"
+  end
+
   private
 
   def monster_params
