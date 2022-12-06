@@ -19,20 +19,29 @@ RSpec.describe "Dungeon's Monsters Index" do
           soul_size: "Common",
           loot: "Falmer War Axe"
         )
-        @dungeon_2 = Dungeon.create!(
-          name: "Forsaken Cave",
-          kind: "Cave",
-          hold: "The Pale",
-          cleared: true,
-          visit_count: 30
-        )
-        @dun_2_mon_1 = @dungeon_2.monsters.create!(
-          name: "Ice Wraith",
-          dead: true,
-          health: 193,
-          level: 10,
+        @dun_1_mon_2 = @dungeon_1.monsters.create!(
+          name: "Chaurus",
+          dead: false,
+          health: 253,
+          level: 12,
           soul_size: "Lesser",
-          loot: "Ice Wraith Teeth"
+          loot: "Chaurus Chitin"
+        )
+        @dun_1_mon_3 = @dungeon_1.monsters.create!(
+          name: "Dwarven Centurion",
+          dead: true,
+          health: 653,
+          level: 24,
+          soul_size: "Grand",
+          loot: "Centurion Dynamo Core"
+        )
+        @dun_1_mon_4 = @dungeon_1.monsters.create!(
+          name: "Frostbite Spider",
+          dead: true,
+          health: 220,
+          level: 8,
+          soul_size: "Petty",
+          loot: "Frostbite Venom"
         )
       end
 
@@ -40,17 +49,14 @@ RSpec.describe "Dungeon's Monsters Index" do
         visit "/dungeons/#{@dungeon_1.id}/monsters"
 
         expect(page).to have_content(@dun_1_mon_1.name)
+        expect(page).to have_content(@dun_1_mon_2.name)
+        expect(page).to have_content(@dun_1_mon_3.name)
+        expect(page).to have_content(@dun_1_mon_4.name)
         expect(page).to have_content("Dead?: #{@dun_1_mon_1.dead}")
         expect(page).to have_content("Health: #{@dun_1_mon_1.health}")
         expect(page).to have_content("Level: #{@dun_1_mon_1.level}")
         expect(page).to have_content("Soul Size: #{@dun_1_mon_1.soul_size}")
         expect(page).to have_content("Loot: #{@dun_1_mon_1.loot}")
-        expect(page).to_not have_content(@dun_2_mon_1.name)
-        expect(page).to_not have_content("Dead?: #{@dun_2_mon_1.dead}")
-        expect(page).to_not have_content("Health: #{@dun_2_mon_1.health}")
-        expect(page).to_not have_content("Level: #{@dun_2_mon_1.level}")
-        expect(page).to_not have_content("Soul Size: #{@dun_2_mon_1.soul_size}")
-        expect(page).to_not have_content("Loot: #{@dun_2_mon_1.loot}")
       end
 
       it 'Then I see a link to add a new adoptable monster for the dungeon "Create Monster"' do
@@ -72,6 +78,27 @@ RSpec.describe "Dungeon's Monsters Index" do
           expect(page).to have_field("Soul Size")
           expect(page).to have_field("Dead?")
           expect(page).to have_field("Loot")
+        end
+      end
+
+      it 'Then I see a link to sort monsters in alphabetical order' do
+        visit "/dungeons/#{@dungeon_1.id}/monsters"
+
+        expect(page).to have_link('Sort Monsters Alphabetically', href: "/dungeons/#{@dungeon_1.id}/monsters?sort=alpha")
+      end
+
+      describe "When I click on the link" do
+        it "I'm taken back to the Dungeon's monsters Index page where I see all of the 
+        dungeon's monsters in alphabetical order" do
+          visit "/dungeons/#{@dungeon_1.id}/monsters"
+
+          click_link('Sort Monsters Alphabetically')
+
+          expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/monsters")
+
+          expect(@dun_1_mon_2.name).to appear_before (@dun_1_mon_3.name)
+          expect(@dun_1_mon_3.name).to appear_before (@dun_1_mon_1.name)
+          expect(@dun_1_mon_1.name).to appear_before (@dun_1_mon_4.name)
         end
       end
     end
