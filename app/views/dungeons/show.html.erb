@@ -5,4 +5,5 @@
 <p>Visit Count: <%= @dungeon.visit_count %></p>
 <p>Number of Monsters: <%= @dungeon.monster_count %></p>
 <a href="/dungeons/<%= @dungeon.id %>/monsters">View Monsters</a> |
-<a href="/dungeons/<%= @dungeon.id %>/edit">Update Dungeon</a>
+<a href="/dungeons/<%= @dungeon.id %>/edit">Update Dungeon</a> |
+<%= link_to "Delete Dungeon", "/dungeons/#{@dungeon.id}", method: :delete%>

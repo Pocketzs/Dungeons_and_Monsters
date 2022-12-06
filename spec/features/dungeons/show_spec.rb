@@ -93,6 +93,14 @@ RSpec.describe "Dungeon Show", type: :feature do
           expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/edit")
         end
       end
+
+      it 'Then I see a link to delete the Dungeon' do
+        visit "/dungeons/#{@dungeon_1.id}"
+        click_link "Delete Dungeon"
+        expect(current_path).to eq("/dungeons")
+
+        expect(page).to_not have_content("Blackreach")
+      end
     end
   end
 end

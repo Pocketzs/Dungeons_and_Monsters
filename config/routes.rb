@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/dungeons/:id", to: "dungeons#show"
   get "/dungeons/:id/edit", to: "dungeons#edit"
   patch "/dungeons/:id", to:"dungeons#update"
+  delete "/dungeons/:id", to: "dungeons#destroy"
   get "/monsters", to: "monsters#index"
   get "/monsters/:id", to: "monsters#show"
   get "/monsters/:id/edit", to: "monsters#edit"

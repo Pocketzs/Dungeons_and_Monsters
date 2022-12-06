@@ -26,6 +26,12 @@ class DungeonsController < ApplicationController
     redirect_to "/dungeons/#{dungeon.id}"
   end
 
+  def destroy
+    dungeon = Dungeon.find(params[:id])
+    dungeon.destroy
+    redirect_to "/dungeons"
+  end
+
   private
 
   def dungeon_params
