@@ -10,9 +10,9 @@ class DungeonMonstersController < ApplicationController
  end
 
   def create
-    @dungeon = Dungeon.find(params[:dungeon_id])
-    @dungeon.monsters.create!(monster_params)
-    redirect_to "/dungeons/#{@dungeon.id}/monsters"
+    dungeon = Dungeon.find(params[:dungeon_id])
+    dungeon.monsters.create!(monster_params)
+    redirect_to "/dungeons/#{dungeon.id}/monsters"
   end
 
   private

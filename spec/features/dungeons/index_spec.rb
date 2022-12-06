@@ -72,6 +72,13 @@ RSpec.describe "Dungeons Index", type: :feature do
           click_link("New Dungeon")
 
           expect(current_path).to eq("/dungeons/new")
+
+          expect(page).to have_field('Name')
+          expect(page).to have_field('Type')
+          expect(page).to have_field('Hold')
+          expect(page).to have_field('Cleared?')
+          expect(page).to have_field('Visit Count')
+          expect(page).to have_button('Create Dungeon')
         end
       end
     end

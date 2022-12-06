@@ -21,9 +21,9 @@ class DungeonsController < ApplicationController
   end
 
   def update
-    @dungeon = Dungeon.find(params[:id])
-    @dungeon.update!(dungeon_params)
-    redirect_to "/dungeons/#{@dungeon.id}"
+    dungeon = Dungeon.find(params[:id])
+    dungeon.update!(dungeon_params)
+    redirect_to "/dungeons/#{dungeon.id}"
   end
 
   private
