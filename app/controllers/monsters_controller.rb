@@ -1,6 +1,6 @@
 class MonstersController < ApplicationController
   def index
-    @monsters = Monster.all
+    @monsters = Monster.all_dead
   end
 
   def show
