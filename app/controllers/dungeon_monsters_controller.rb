@@ -1,7 +1,11 @@
 class DungeonMonstersController < ApplicationController
   def index
     @dungeon = Dungeon.find(params[:dungeon_id])
-    @monsters = @dungeon.monsters
+    if params[:sort] == 'alpha'
+      @monsters = @dungeon.monsters.alpha_sort_by_name
+    else
+      @monsters = @dungeon.monsters
+    end
   end
 
   def new

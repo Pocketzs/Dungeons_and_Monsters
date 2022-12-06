@@ -1,5 +1,6 @@
 <h1>Monsters of <%= @dungeon.name %></h1>
-<a href="<%= "/dungeons/#{@dungeon.id}/monsters/new" %>">Create Monster</a>
+<a href="<%= "/dungeons/#{@dungeon.id}/monsters/new" %>">Create Monster</a> |
+<%= link_to "Sort Monsters Alphabetically", "/dungeons/#{@dungeon.id}/monsters?sort=alpha" %>
 <% @monsters.each do |monster| %>
   <h3><%= monster.name %></h3>
   <p>Health: <%= monster.health %></p>
