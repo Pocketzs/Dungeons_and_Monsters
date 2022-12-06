@@ -3,6 +3,8 @@ class DungeonMonstersController < ApplicationController
     @dungeon = Dungeon.find(params[:dungeon_id])
     if params[:sort] == 'alpha'
       @monsters = @dungeon.monsters.alpha_sort_by_name
+    elsif params[:sort] == 'threshold'
+      @monsters = @dungeon.monsters.attribute_threshold_select(params[:threshold], params[:attribute])
     else
       @monsters = @dungeon.monsters
     end

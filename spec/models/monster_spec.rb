@@ -60,5 +60,13 @@ RSpec.describe Monster, type: :model do
         expect(Monster.alpha_sort_by_name).to eq(expected)
       end
     end
+
+    describe '#attribute_threshold_select' do
+      it 'returns all monsters that meet a given threshold for a given attribute' do
+        params = {threshold: 300, attribute: 'health'}
+
+        expect(Monster.attribute_threshold_select(params[:threshold], params[:attribute])).to eq([@mon_3])
+      end
+    end
   end
 end

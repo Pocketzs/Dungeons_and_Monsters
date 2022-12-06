@@ -8,4 +8,8 @@ class Monster < ApplicationRecord
   def self.alpha_sort_by_name
     self.order(:name)
   end
+
+  def self.attribute_threshold_select(threshold, attribute)
+    self.where("#{attribute} > #{threshold}")
+  end
 end
