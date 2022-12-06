@@ -13,7 +13,7 @@ RSpec.describe "Monsters Index", type: :feature do
         )
         @mon_1 = @dungeon_1.monsters.create!(
           name: "Falmer",
-          dead: false,
+          dead: true,
           health: 180,
           level: 9,
           soul_size: "Common",
@@ -21,7 +21,7 @@ RSpec.describe "Monsters Index", type: :feature do
         )
        @mon_2 = @dungeon_1.monsters.create!(
           name: "Chaurus",
-          dead: true,
+          dead: false,
           health: 253,
           level: 12,
           soul_size: "Lesser",
@@ -61,6 +61,17 @@ RSpec.describe "Monsters Index", type: :feature do
 
           expect(current_path).to eq("/monsters/#{@mon_1.id}/edit")
         end
+      end
+
+      it 'I can click a link to delete the monster "Delete Monster"' do
+        visit "/monsters"
+        expect(page).to have_content("Falmer")
+
+        visit "/monsters/#{@mon_1.id}"
+
+        click_link("Delete Monster", href: "/monsters/#{@mon_1.id}")
+        expect(current_path).to eq("/monsters")
+        expect(page).to_not have_content("Falmer")
       end
     end
   end
