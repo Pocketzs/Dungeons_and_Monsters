@@ -114,6 +114,31 @@ RSpec.describe "Dungeon's Monsters Index" do
 
         expect(current_path).to eq("/monsters/#{@dun_1_mon_1.id}/edit")
       end
+
+      it 'I see a form that allows me to input a number value' do
+        visit "/dungeons/#{@dungeon_1.id}/monsters"
+        expect(page).to have_field(:threshold)
+        expect(page).to have_field(:attribute)
+        expect(page).to have_button("Confirm")
+      end
+
+      describe "When I input a number value and click the submit button" do
+        it 'Then I am brought back to the index page with only the records that
+        meet that threshold shown' do
+          visit "/dungeons/#{@dungeon_1.id}/monsters"
+
+          fill_in(:threshold, with: 300 )
+          select('health', from: :attribute)
+          click_button('Confirm')
+
+          expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/monsters")
+
+          expect(page).to have_content(@dun_1_mon_3.name)
+          expect(page).to_not have_content(@dun_1_mon_1.name)
+          expect(page).to_not have_content(@dun_1_mon_2.name)
+          expect(page).to_not have_content(@dun_1_mon_4.name)
+        end
+      end
     end
   end
 end

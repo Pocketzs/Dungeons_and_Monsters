@@ -1,6 +1,13 @@
 <h1>Monsters of <%= @dungeon.name %></h1>
 <a href="<%= "/dungeons/#{@dungeon.id}/monsters/new" %>">Create Monster</a> |
-<%= link_to "Sort Monsters Alphabetically", "/dungeons/#{@dungeon.id}/monsters?sort=alpha" %>
+<%= link_to "Sort Monsters Alphabetically", "/dungeons/#{@dungeon.id}/monsters?sort=alpha" %> |
+<%= form_with url: "/dungeons/#{@dungeon.id}/monsters?sort=threshold", method: :get, local: true do |form|  %>
+  Only return Monsters at more than
+  <%= form.number_field :threshold %>
+  <%= form.select :attribute, ['health', 'level'] %>
+  <%= form.hidden_field :sort, value: 'threshold' %>
+  <%= form.submit "Confirm" %>
+<% end %>
 <% @monsters.each do |monster| %>
   <hr>
   <h3><%= monster.name %></h3>
