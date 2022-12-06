@@ -1,7 +1,10 @@
 <h1>Dungeons Index</h1>
 <a href="/dungeons/new">New Dungeon</a>
 <% @dungeons.each do |dungeon| %>
-  <h2><p><%= dungeon.name %></p></h2>
+  <hr>
+  <h2><p><%= dungeon.name %> </p></h2>
   <p>Created at: <%= dungeon.created_at %></p>
+  <p><%= link_to "Edit", "/dungeons/#{dungeon.id}/edit" %></p>
 <% end %>
+
 

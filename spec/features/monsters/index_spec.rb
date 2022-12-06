@@ -63,6 +63,17 @@ RSpec.describe "Monsters Index", type: :feature do
         expect(page).to have_content("Soul Size: #{@mon_4.soul_size}")
         expect(page).to have_content("Loot: #{@mon_4.loot}")
       end
+
+      it 'Next to every monster I see a link to edit that monsters info' do
+        visit "/monsters"
+
+        expect(page).to have_link("Edit", href: "/monsters/#{@mon_3.id}/edit")
+        expect(page).to have_link("Edit", href: "/monsters/#{@mon_4.id}/edit")
+
+        click_link("Edit", href: "/monsters/#{@mon_3.id}/edit")
+
+        expect(current_path).to eq("/monsters/#{@mon_3.id}/edit")
+      end
     end
   end
 end

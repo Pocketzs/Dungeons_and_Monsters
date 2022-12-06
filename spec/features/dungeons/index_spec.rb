@@ -81,6 +81,19 @@ RSpec.describe "Dungeons Index", type: :feature do
           expect(page).to have_button('Create Dungeon')
         end
       end
+
+      it "Next to every dungeon I see a link to edit that dungeon's info" do
+        visit "/dungeons"
+
+        expect(page).to have_link("Edit", href: "/dungeons/#{@dungeon_1.id}/edit")
+        expect(page).to have_link("Edit", href: "/dungeons/#{@dungeon_2.id}/edit")
+        expect(page).to have_link("Edit", href: "/dungeons/#{@dungeon_3.id}/edit")
+        expect(page).to have_link("Edit", href: "/dungeons/#{@dungeon_4.id}/edit")
+
+        click_link("Edit", href: "/dungeons/#{@dungeon_1.id}/edit")
+
+        expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/edit")
+      end
     end
   end
 end

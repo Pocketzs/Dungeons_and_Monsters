@@ -101,6 +101,19 @@ RSpec.describe "Dungeon's Monsters Index" do
           expect(@dun_1_mon_1.name).to appear_before (@dun_1_mon_4.name)
         end
       end
+
+      it 'Next to every monster I see a link to edit that monsters info' do
+        visit "/dungeons/#{@dungeon_1.id}/monsters"
+
+        expect(page).to have_link("Edit", href: "/monsters/#{@dun_1_mon_1.id}/edit")
+        expect(page).to have_link("Edit", href: "/monsters/#{@dun_1_mon_2.id}/edit")
+        expect(page).to have_link("Edit", href: "/monsters/#{@dun_1_mon_3.id}/edit")
+        expect(page).to have_link("Edit", href: "/monsters/#{@dun_1_mon_4.id}/edit")
+
+        click_link("Edit", href: "/monsters/#{@dun_1_mon_1.id}/edit")
+
+        expect(current_path).to eq("/monsters/#{@dun_1_mon_1.id}/edit")
+      end
     end
   end
 end
