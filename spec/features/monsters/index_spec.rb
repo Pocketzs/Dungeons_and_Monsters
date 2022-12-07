@@ -74,6 +74,19 @@ RSpec.describe "Monsters Index", type: :feature do
 
         expect(current_path).to eq("/monsters/#{@mon_3.id}/edit")
       end
+
+      it 'Next to every monster I see a link to delete that monster' do
+        visit '/monsters'
+
+        expect(page).to have_link('Delete', href: "/monsters/#{@mon_3.id}")
+        expect(page).to have_link('Delete', href: "/monsters/#{@mon_4.id}")
+
+        click_link("Delete", href: "/monsters/#{@mon_3.id}")
+
+        expect(current_path).to eq("/monsters")
+
+        expect(page).to_not have_content(@mon_3.name)
+      end
     end
   end
 end

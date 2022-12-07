@@ -139,6 +139,25 @@ RSpec.describe "Dungeon's Monsters Index" do
           expect(page).to_not have_content(@dun_1_mon_4.name)
         end
       end
+
+      it 'Next to every monster I see a link to delete that monster' do
+        visit "/monsters"
+
+        expect(page).to have_content(@dun_1_mon_3.name)
+        
+        visit "/dungeons/#{@dungeon_1.id}/monsters"
+
+        expect(page).to have_link('Delete', href: "/monsters/#{@dun_1_mon_1.id}")
+        expect(page).to have_link('Delete', href: "/monsters/#{@dun_1_mon_2.id}")
+        expect(page).to have_link('Delete', href: "/monsters/#{@dun_1_mon_3.id}")
+        expect(page).to have_link('Delete', href: "/monsters/#{@dun_1_mon_4.id}")
+
+        click_link("Delete", href: "/monsters/#{@dun_1_mon_3.id}")
+
+        expect(current_path).to eq("/monsters")
+
+        expect(page).to_not have_content(@dun_1_mon_3.name)
+      end
     end
   end
 end
