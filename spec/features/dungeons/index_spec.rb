@@ -94,6 +94,20 @@ RSpec.describe "Dungeons Index", type: :feature do
 
         expect(current_path).to eq("/dungeons/#{@dungeon_1.id}/edit")
       end
+
+      it 'Next to every dungeon I see a link to delete that dungeon' do
+        visit "/dungeons"
+
+        expect(page).to have_link("Delete", href: "/dungeons/#{@dungeon_1.id}")
+        expect(page).to have_link("Delete", href: "/dungeons/#{@dungeon_2.id}")
+        expect(page).to have_link("Delete", href: "/dungeons/#{@dungeon_3.id}")
+        expect(page).to have_link("Delete", href: "/dungeons/#{@dungeon_4.id}")
+
+        click_link("Delete", href: "/dungeons/#{@dungeon_1.id}")
+
+        expect(current_path).to eq('/dungeons')
+        expect(page).to_not have_content(@dungeon_1.name)
+      end
     end
   end
 end

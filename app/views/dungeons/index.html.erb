@@ -4,7 +4,8 @@
   <hr>
   <h3><p><%= dungeon.name %> </p></h3>
   <p>Created at: <%= dungeon.created_at %></p>
-  <p><%= link_to "Edit", "/dungeons/#{dungeon.id}/edit" %></p>
+  <p><%= link_to "Edit", "/dungeons/#{dungeon.id}/edit" %> | 
+  <%= link_to "Delete", "/dungeons/#{dungeon.id}", method: :delete %></p> 
 <% end %>
 
 
